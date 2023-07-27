@@ -2,5 +2,8 @@ from django.urls import path, include
 from .views import *
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', Home.as_view(), name='home'),
+    path('category/<str:slug>', ByCategory.as_view(), name='category'),
+    path('post/<str:slug>/', PostView.as_view(), name='post'),
+    path('tag/<str:slug>/', ByTag.as_view(), name='tag'),
 ]
