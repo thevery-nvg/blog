@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Search results{% endblock %}
+
+{% block content %}
+
+    <section class="blog-post-area">
+        <div class="container">
+            <div class="border-top" style="border-top: 1px solid #40c4ff"></div>
+            <div class="row">
+                <div class="blog-post-area-style">
+                    {% for item in object_list %}
+                        <div class="col-md-3">
+                            <div class="single-post">
+                                <img src="{{ item.photo.url }}" alt="">
+                                <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+                                <h4><span>Posted By: <span class="author-name">{{ item.author }}</span></span>
+                                </h4>
+                                {{ item.content |safe|truncatewords_html:20 }}
+                                <h4><span>{{ item.created_at|timesince }}</span></h4>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+        <div class="pegination">
+
+            <div class="nav-links">
+                <span class="page-numbers current">1</span>
+                <a class="page-numbers" href="#">2</a>
+                <a class="page-numbers" href="#">3</a>
+                <a class="page-numbers" href="#">4</a>
+                <a class="page-numbers" href="#">5</a>
+                <a class="page-numbers" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
