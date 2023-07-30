@@ -1,0 +1,20 @@
+<section class="blog-post-area">
+    {% if page_obj.has_other_pages %}
+        <div class="pegination">
+            <div class="nav-links">
+                {% for page in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page %}
+                        <span class="page-numbers current">{{ page }}</span>
+                    {% elif page > page_obj.number|add:-3 and page < page_obj.number|add:3 %}
+                        <a class="page-numbers" href="?page={{ page }}">{{ page }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.number < page_obj.paginator.num_pages|add:-2 %}
+                    <a class="page-numbers"
+                       href="?page={{ page_obj.paginator.num_pages }}">..{{ page_obj.paginator.num_pages }}</a>
+
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</section>
