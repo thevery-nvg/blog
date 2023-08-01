@@ -18,16 +18,23 @@
     <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'responsive.css' %}">
+
+
 </head>
 
 <body>
 <div class="wrapper">
 
-    {% cache 20 header %}
-        {% include 'inc/_header.html' %}
-    {% endcache %}
 
-    {% block content %}{% endblock %}
+    {% include 'inc/_header.html' %}
+
+
+    <section class="bg-text-area">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </section>
+
     {% include 'inc/_paginator.html' %}
     {% include 'inc/_footer.html' %}
 

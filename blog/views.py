@@ -16,7 +16,7 @@ class Home(ListView):
         return context
 
 
-class ByCategory(ListView):
+class ByCategory(Home):
     context_object_name = 'posts'
     template_name = 'blog/index.html'
     allow_empty = False
@@ -27,7 +27,7 @@ class ByCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'class ByCategory(ListView)'
+        context['title'] = 'class ByCategory(Home)'
         return context
 
 

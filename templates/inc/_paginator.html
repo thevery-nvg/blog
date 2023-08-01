@@ -2,6 +2,10 @@
     {% if page_obj.has_other_pages %}
         <div class="pegination">
             <div class="nav-links">
+                {% if page_obj.number > 3 %}
+                    <a class="page-numbers"
+                       href="?page=1">1..</a>
+                {% endif %}
                 {% for page in page_obj.paginator.page_range %}
                     {% if page_obj.number == page %}
                         <span class="page-numbers current">{{ page }}</span>

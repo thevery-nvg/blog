@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+
+    <h1>Авторизация</h1>
+    {% include 'inc/_loginviasocial.html' %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-error">{{ form.non_field_errors }}</div>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block">Войти</button>
+    </form>
+
+{% endblock %}
