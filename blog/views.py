@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import F
 from .models import *
+from .forms import AddPostForm
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class Home(ListView):
@@ -55,6 +58,7 @@ class PostView(DetailView):
         self.object.refresh_from_db()
         return context
 
+
 class Search(ListView):
     template_name = 'blog/search.html'
     context_object_name = 'posts'
@@ -62,7 +66,13 @@ class Search(ListView):
 
     def get_queryset(self):
         return Post.objects.filter(title__icontains=self.request.GET.get('search'))
-    
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class AddPost(LoginRequiredMixin, CreateView):
+    form_class = AddPostForm
+    template_name = 'blog/addpost.html'
+

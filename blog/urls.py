@@ -7,4 +7,5 @@ urlpatterns = [
     path('post/<str:slug>/', PostView.as_view(), name='post'),
     path('tag/<str:slug>/', ByTag.as_view(), name='tag'),
     path('search/', Search.as_view(), name='search'),
+    path('addpost/', AddPost.as_view(), name='addpost'),
 ]
