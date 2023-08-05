@@ -76,3 +76,7 @@ class AddPost(LoginRequiredMixin, CreateView):
     form_class = AddPostForm
     template_name = 'blog/addpost.html'
 
+    def form_valid(self, form):
+        """Автором становится текущий пользователь"""
+        form.instance.author = self.request.user
+        return super().form_valid(form)

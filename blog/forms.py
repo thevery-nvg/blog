@@ -8,7 +8,6 @@ from .models import Post
 class PostAdminForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorUploadingWidget, label='Текст')
 
-
     class Meta:
         model = Post
         fields = '__all__'
@@ -16,6 +15,7 @@ class PostAdminForm(forms.ModelForm):
 
 class AddPostForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorUploadingWidget, label='Текст')
+
     class Meta:
         model = Post
-        exclude = ['views', 'slug']
+        exclude = ['views', 'slug', 'author']
