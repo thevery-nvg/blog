@@ -4,7 +4,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.db.models import F
 from .models import *
 from .forms import AddPostForm
-from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -23,7 +22,6 @@ class Home(ListView):
 class ByCategory(Home):
     context_object_name = 'posts'
     template_name = 'blog/index.html'
-    allow_empty = False
     paginate_by = 1
 
     def get_queryset(self):
@@ -75,21 +73,22 @@ class Search(ListView):
 
 class AddPost(LoginRequiredMixin, CreateView):
     form_class = AddPostForm
-    template_name = 'blog/addpost.html'
+    template_name = 'blog/post_add.html'
 
     def form_valid(self, form):
-        """Автором становится текущий пользователь"""
+        """Set current user as a post's author"""
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
 class UpdatePost(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
-    template_name = 'blog/updatepost.html'
+    form_class = AddPostForm
+    template_name = 'blog/post_update.html'
 
 
 class DeletePost(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
+
     success_url = reverse_lazy('home')
