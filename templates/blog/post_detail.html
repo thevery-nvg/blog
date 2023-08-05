@@ -15,7 +15,14 @@
                         <div class="col-md-8">
                             <div class="blog-area">
                                 <div class="blog-area-part">
+                                    <div class="logo">
+                                        <ul>
+                                            <a href="{% url 'updatepost' post.slug %}">Update post</a> | <a
+                                                href="{% url 'deletepost' post.slug %}">Delete post</a>
+                                        </ul>
+                                    </div>
                                     <h2>{{ post.title }}</h2>
+
                                     <div class="for-style">
                                         <div>
                                             <span>
@@ -40,6 +47,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="newsletter">
                                 <h2 class="sidebar-title">Search</h2>

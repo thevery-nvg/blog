@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import F
 from .models import *
 from .forms import AddPostForm
@@ -80,3 +81,15 @@ class AddPost(LoginRequiredMixin, CreateView):
         """Автором становится текущий пользователь"""
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class UpdatePost(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ['title', 'content']
+    template_name = 'blog/updatepost.html'
+
+
+class DeletePost(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'blog/post_delete.html'
+    success_url = reverse_lazy('home')
