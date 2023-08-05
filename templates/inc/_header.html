@@ -4,7 +4,7 @@
         <span class="navbar-text">
             {% if request.user.is_authenticated %}
                 {{ user }} | <a href="{% url 'logout' %}">Logout</a>
-                <a href="{% url 'addpost' %}">Добавить пост</a>
+
             {% else %}
                 <a href="{% url 'register' %}">Register</a>|<a href="{% url 'login' %}">Login</a>
             {% endif %}
@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="logo">
-                    <h2><a href="{% url 'home' %}">HOME</a></h2>
+                    <h2><a href="{% url 'addpost' %}">Add post</a></h2>
                 </div>
             </div>
             <div class="col-md-10">
