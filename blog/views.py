@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class Home(ListView):
     model = Post
-    template_name = 'blog/index.html'
+    template_name = 'blog/post_list.html'
     context_object_name = 'posts'
     paginate_by = 1
 
@@ -21,7 +21,7 @@ class Home(ListView):
 
 class ByCategory(Home):
     context_object_name = 'posts'
-    template_name = 'blog/index.html'
+    template_name = 'blog/post_list.html'
     paginate_by = 1
 
     def get_queryset(self):
@@ -59,7 +59,7 @@ class PostView(DetailView):
 
 
 class Search(ListView):
-    template_name = 'blog/search.html'
+    template_name = 'blog/post_search.html'
     context_object_name = 'posts'
     paginate_by = 2
 
@@ -90,5 +90,4 @@ class UpdatePost(LoginRequiredMixin, UpdateView):
 class DeletePost(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
-
     success_url = reverse_lazy('home')

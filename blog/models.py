@@ -42,13 +42,14 @@ class Tag(models.Model):
 class Post(models.Model):
     objects = models.Manager()
     published = PublishedManager()
+
     class Status(models.TextChoices):
         DRAFT = 'DF', 'Draft'
         PUBLISHED = 'PB', 'Published'
 
     title = models.CharField(max_length=128)
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.PUBLISHED)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts',blank=True,default=None)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts', blank=True, default=None)
     slug = models.SlugField(unique=True)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

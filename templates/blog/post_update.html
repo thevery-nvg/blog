@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+    <h2 class="alert-info">Update post '{{ post.title }}'</h2>
     <form action="{% url 'updatepost' post.slug %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.media }}
