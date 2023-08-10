@@ -50,7 +50,7 @@ class Post(models.Model):
     title = models.CharField(max_length=128)
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.PUBLISHED)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts', blank=True, default=None)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=250, unique_for_date='created_at')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(upload_to='%Y/%m/%d', blank=True)
@@ -71,7 +71,11 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={'slug': self.slug})
+        return reverse('post', args=[
+                                                self.created_at.year,
+                                                self.created_at.month,
+                                                self.created_at.day,
+                                                self.slug])
 
     class Meta:
         ordering = ['-created_at']
